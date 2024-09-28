@@ -52,6 +52,8 @@ const Searchbar = () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const product = await scrapeAndStoreProduct(searchValue);
+
+      if (!product) return;
     } catch (error) {
       console.log(error);
     } finally {
