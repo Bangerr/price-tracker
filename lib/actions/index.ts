@@ -1,11 +1,19 @@
 "use server";
-
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../db";
 import Product from "../models/product.model";
 import { scrapeAmazonProduct } from "../scraper";
+import { auth } from "@/auth";
 
 export async function scrapeAndStoreProduct(productUrl: string) {
+  const session = await auth();
+  const user = session?.user;
+  console.log("User data:", user?.email, user?.id);
+
+  if (!user) {
+    throw new Error(`No user found!!!!`);
+  }
+
   if (!productUrl) return;
 
   try {
@@ -21,7 +29,15 @@ export async function scrapeAndStoreProduct(productUrl: string) {
       {
         url: scrapedProduct.url,
       },
-      product,
+      {
+        $set: product,
+        $addToSet: {
+          users: {
+            userId: user.id,
+            email: user.email,
+          },
+        },
+      },
       { upsert: true, new: true }
     );
 
@@ -35,10 +51,30 @@ export async function scrapeAndStoreProduct(productUrl: string) {
 }
 
 export async function getAllProducts() {
+  const session = await auth();
+  const user = session?.user;
+  console.log("User data:", user?.email, user?.id);
+
+  if (!user) return null;
+
   try {
     connectToDatabase();
 
-    const products = await Product.find();
+    const id = user?.id;
+
+    console.log("ID: ", id);
+
+    const filter: any = {};
+
+    if (id) {
+      filter["users.userId"] = id;
+    }
+
+    const products = await Product.find(filter);
+
+    console.log(`Found ${products.length} products for user ${id}`);
+
+    revalidatePath("/");
 
     return products;
   } catch (error: any) {
@@ -54,3 +90,22 @@ export async function delleteProductById(productId: string) {
     throw new Error(`Failed to delete product: ${error.message}`);
   }
 }
+
+// async function migrateProducts() {
+//   try {
+//     await connectToDatabase();
+
+//     const result = await Product.updateMany(
+//       { users: { $exists: false } },
+//       { $set: { users: [] } }
+//     );
+
+//     console.log(`Updated ${result.modifiedCount} documents`);
+//   } catch (error) {
+//     console.error("Migration failed:", error);
+//   } finally {
+//     process.exit();
+//   }
+// }
+
+// migrateProducts();

@@ -52,24 +52,24 @@ export async function scrapeAmazonProduct(url: string) {
         ".savingPriceOverride.reinventPriceSavingsPercentageMargin.savingsPercentage:first"
       )
     );
-    const data = {
-      url,
-      title,
-      currentPrice,
-      originalPrice,
-      currency,
-      discount,
-    };
-    console.log(data);
     // const data = {
     //   url,
-    //   title:
-    //     "Apple AirPods Max Wireless Over-Ear Headphones, Active Noise Cancelling, Transparency Mode, Personalized Spatial Audio, Dolby Atmos, Bluetooth Headphones for iPhone – Silver",
-    //   currentPrice: 599,
-    //   originalPrice: 699,
-    //   currency: "$",
-    //   discount: "-10%",
+    //   title,
+    //   currentPrice,
+    //   originalPrice,
+    //   currency,
+    //   discount,
     // };
+    //console.log(data);
+    const data = {
+      url,
+      title:
+        "Apple AirPods Max Wireless Over-Ear Headphones, Active Noise Cancelling, Transparency Mode, Personalized Spatial Audio, Dolby Atmos, Bluetooth Headphones for iPhone – Silver",
+      currentPrice: 599,
+      originalPrice: 699,
+      currency: "$",
+      discount: "-10%",
+    };
 
     return data;
 

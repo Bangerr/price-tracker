@@ -2,12 +2,47 @@ import Searchbar from "@/components/Searchbar";
 import { getAllProducts } from "@/lib/actions";
 import React from "react";
 import DeleteProductButton from "@/components/DeleteProductButton";
+import { auth, signOut } from "@/auth";
+
+function SignOutButton() {
+  return (
+    <form
+      action={async () => {
+        "use server";
+        await signOut();
+      }}>
+      <button
+        type="submit"
+        className="border border-black p-2 hover:bg-black hover:text-white hover:cursor-pointer transition duration-200">
+        Sign out
+      </button>
+    </form>
+  );
+}
 
 const Home = async () => {
+  const session = await auth();
+  const user = session?.user;
+
+  //if (!user) return console.log("No user found!!!!");
+
   const products = await getAllProducts();
+
+  // if (products === null) {
+  //   return (
+  //     <div className="px-6 md:px-20 py-5">
+  //       <p className="text-primary font-bold text-xl">NONTHING FOUND !</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
+      {user ? (
+        <div className="px-6 md:px-20 py-5">
+          <SignOutButton />
+        </div>
+      ) : null}
       <section className="px-6 md:px-20 py-24">
         <div className="flex max-xl:flex-col flex-row gap-16">
           <div className="flex flex-col justify-center w-full">
@@ -66,6 +101,12 @@ const Home = async () => {
               </a>
             </div>
           ))}
+
+          {products === null ? (
+            <div className="py-5">
+              <p className="text-primary font-bold text-xl">NONTHING FOUND !</p>
+            </div>
+          ) : null}
         </div>
       </section>
     </>
