@@ -8,6 +8,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      display: ["group-hover"],
       colors: {
         primary: {
           DEFAULT: "#E43030",
