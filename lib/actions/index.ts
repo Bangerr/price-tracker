@@ -1,4 +1,6 @@
+/* eslint-disable  no-explicit-any */
 "use server";
+
 import { revalidatePath } from "next/cache";
 import client, { connectToDatabase } from "../db";
 import Product from "../models/product.model";
