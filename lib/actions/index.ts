@@ -1,4 +1,5 @@
 "use server";
+
 import { revalidatePath } from "next/cache";
 import client, { connectToDatabase } from "../db";
 import Product from "../models/product.model";
@@ -23,11 +24,10 @@ export async function scrapeAndStoreProduct(productUrl: string) {
 
   try {
     //connectToDatabase();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scrapedProduct = await scrapeAmazonProduct(productUrl);
     if (!scrapedProduct) return;
 
-    let product = scrapedProduct;
+    const product = scrapedProduct;
     console.log(product);
     //const existingProduct = await Product.findOne({ url: scrapedProduct.url });
 

@@ -28,8 +28,8 @@ const isValidAmazonProductUrl = (url: string) => {
     ) {
       return true;
     }
-  } catch (error) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (error: any) {
+    console.log(error);
     return false;
   }
   return false;
@@ -50,7 +50,6 @@ const Searchbar = () => {
     try {
       setIsLoading(true);
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const product = await scrapeAndStoreProduct(searchValue);
 
       if (!product) return;
