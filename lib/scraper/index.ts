@@ -72,10 +72,7 @@ export async function scrapeAmazonProduct(url: string) {
     };
 
     return data;
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     throw new Error(`Failed to scrape product: ${error.message}`);
   }
 }
