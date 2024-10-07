@@ -64,9 +64,9 @@ export async function scrapeAmazonProduct(url: string) {
     const data = {
       url,
       title:
-        "Apple AirPods Max Wireless Over-Ear Headphones, Active Noise Cancelling, Transparency Mode, Personalized Spatial Audio, Dolby Atmos, Bluetooth Headphones for iPhone – Silver",
-      currentPrice: 599,
-      originalPrice: 699,
+        "Apple AirPod Max Wireless Over-Ear Headphones, Active Noise Cancelling, Transparency Mode, Personalized Spatial Audio, Dolby Atmos, Bluetooth Headphones for iPhone – Silver",
+      currentPrice: 799,
+      originalPrice: 899,
       currency: "$",
       discount: "-10%",
     };
