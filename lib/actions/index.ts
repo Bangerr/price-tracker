@@ -23,7 +23,6 @@ export async function scrapeAndStoreProduct(productUrl: string) {
 
   try {
     //connectToDatabase();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scrapedProduct = await scrapeAmazonProduct(productUrl);
     if (!scrapedProduct) return;
 
