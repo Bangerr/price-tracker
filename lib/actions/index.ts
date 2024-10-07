@@ -1,4 +1,3 @@
-/* eslint-disable  no-explicit-any */
 "use server";
 
 import { revalidatePath } from "next/cache";
