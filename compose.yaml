@@ -1,0 +1,26 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    develop:
+      watch:
+        - path: ./package.json
+          action: rebuild
+        - path: ./next.config.js
+          action: rebuild
+        - path: ./package-lock.json
+          action: rebuild
+        - path: .
+          target: /app
+          action: sync
+    environment:
+      - MONGODB_URI=MONGODB_URI
+      - AUTH_SECRET=AUTH_SECRET
+      - AUTH_GOOGLE_ID=AUTH_GOOGLE_ID
+      - AUTH_GOOGLE_SECRET=AUTH_SECRET
+
+volumes:
+  tasked:
