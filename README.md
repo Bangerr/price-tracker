@@ -1,3 +1,5 @@
+NOT FINISHED YET!!!!
+
 # Price Tracker
 
 A web scraper for tracking Amazon product prices, built for educational purposes.
