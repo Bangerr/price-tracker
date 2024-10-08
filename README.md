@@ -4,14 +4,14 @@ A web scraper for tracking Amazon product prices, built for educational purposes
 
 ## Introduction
 
-This project allows users to track prices of Amazon products by simply pasting the product link. It uses a web scraper to fetch and store product details in MongoDB. Authentication is handled by AuthJS, enabling users to log in with their Google accounts.
+This project allows users to track Amazon product prices by adding items through their product links. It uses MongoDB for data storage, Auth.js for Google account authentication, and Bright Data with Cheerio for web scraping.
 
 ## Features
 
 - Add products to track by pasting Amazon product links
 - User authentication via Google accounts
-- Product details stored in MongoDB
-- Automated price tracking and updates
+- Automated web scraping to update product prices
+- Data storage in MongoDB
 
 ## Prerequisites
 
@@ -22,43 +22,61 @@ This project allows users to track prices of Amazon products by simply pasting t
 ## Installation
 
 1. Clone the repository:
+
    ```
    git clone https://github.com/yourusername/price-tracker.git
    cd price-tracker
    ```
 
 2. Install dependencies:
+
    ```
    npm install
    ```
 
 3. Set up environment variables:
    Create a `.env` file in the root directory and add the following variables:
+
    ```
+   BRIGHT_DATA_USERNAME=your_bright_data_username
+   BRIGHT_DATA_PASSWORD=your_bright_data_password
+   BRIGHT_DATA_AUTH=your_bright_data_auth
    MONGODB_URI=your_mongodb_connection_string
-   GOOGLE_CLIENT_ID=your_google_client_id
-   GOOGLE_CLIENT_SECRET=your_google_client_secret
-   NEXTAUTH_URL=http://localhost:3000
-   NEXTAUTH_SECRET=your_nextauth_secret
+   AUTH_SECRET=your_auth_secret
+   AUTH_GOOGLE_ID=your_google_id
+   AUTH_GOOGLE_SECRET=your_google_secret
    ```
-   Replace the placeholder values with your actual credentials.
+
+   Replace the placeholder values with your own secrets and credentials.
 
 4. Run the development server:
+
    ```
    npm run dev
    ```
 
-5. Open `http://localhost:3000` in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
 ## Usage
 
 1. Log in using your Google account.
-2. Paste an Amazon product link in the search bar to add it to your tracking list.
-3. View your tracked products and their price history.
+2. Paste an Amazon product link into the search bar to add it to your tracking list.
+3. View and manage your tracked products on the dashboard.
 
 ## Docker
 
-While this project was developed using Docker, it's not required to run the application. If you prefer to use Docker, a `Dockerfile` and `docker-compose.yml` are provided in the repository.
+This project includes Docker support, but it's not required to run the application. If you prefer to use Docker:
+
+1. Build the Docker image:
+
+   ```
+   docker build -t price-tracker .
+   ```
+
+2. Run the container:
+   ```
+   docker run -p 3000:3000 price-tracker
+   ```
 
 ## Contributing
 
@@ -70,4 +88,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Disclaimer
 
-This project is for educational purposes only. Please ensure you comply with Amazon's terms of service when using this application.
+This project is for educational purposes only. Be sure to comply with Amazon's terms of service and robots.txt when using this application.
