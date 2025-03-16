@@ -1,4 +1,4 @@
-NOT FINISHED YET!!!!
+I have removed the link to the website as Bright Data's trial expired has expired, but you can clone the repository and follow the instructions below.
 
 # Price Tracker
 
